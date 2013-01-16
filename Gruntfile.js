@@ -1,5 +1,6 @@
 module.exports = function( grunt ) {
   'use strict';
+  grunt.loadNpmTasks('grunt-typescript');
   //
   // Grunt configuration:
   //
@@ -14,6 +15,18 @@ module.exports = function( grunt ) {
     bower: {
       dir: 'app/components'
     },
+
+	// Typescript to JS Compilation
+	typescript: {
+	  base: {
+		src: ['app/scripts/**/*.ts'],
+		dest: ['app/scripts'],
+		options: {
+		  sourcemap: true,
+		  declaration: true
+		}
+	  }
+	},
 
     // Coffee to JS compilation
     coffee: {
