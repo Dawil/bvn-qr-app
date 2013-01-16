@@ -1,3 +1,4 @@
+/// <reference path="../app.ts" />
 'use strict';
 
 bvnQrApp.controller('MainCtrl', function($scope) {

@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 	// Typescript to JS compilation
     typescript: {
 	  base: {
-		  src: ['app/scripts/**/*.ts'],
+		  src: ['app/scripts/**/*.ts', 'app/scripts/*/*.ts'],
 		  dest: 'app/scripts',
 		  options: {
 		    base_path: 'app/scripts',

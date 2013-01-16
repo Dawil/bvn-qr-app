@@ -20,8 +20,12 @@ Spec
 SiteMap
 =======
 
-    /
-    /login
-    /sessions
-    /sessions/new
-    /sessions/:id/show
+    /					# Displays /login if not logged in, otherwise /sessions
+    /login				# Displays a login interface
+    /sessions			# Displays a list of sessions and an option to create one
+    /sessions/:id/show	# Displays an individual session
+
+Sessions
+--------
+
+A session has a co-ordinator, attending employees list and an option to scan in a new employee.
