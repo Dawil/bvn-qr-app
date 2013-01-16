@@ -20,8 +20,8 @@ Spec
 SiteMap
 =======
 
-/
-/login
-/sessions
-/sessions/new
-/sessions/:id/show
+    /
+    /login
+    /sessions
+    /sessions/new
+    /sessions/:id/show
