@@ -29,3 +29,18 @@ Sessions
 --------
 
 A session has a co-ordinator, attending employees list and an option to scan in a new employee.
+
+Authentication
+==============
+
+We create a service, `auth`, which provides the necessary methods to authenticate the user.
+
+    logIn
+    logOut
+    isLoggedIn
+
+Tests
+=====
+
+* should test that `auth` service exists
+* test `auth` has the above methods
