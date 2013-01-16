@@ -2,3 +2,5 @@
 *.map
 */*.js
 */*.map
+!vendor/*
+vendor/.DS_Store
