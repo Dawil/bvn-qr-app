@@ -1,6 +1,6 @@
 'use strict';
 
-var bvnQrAppApp = angular.module('bvnQrAppApp', [])
+var bvnQrApp = angular.module('bvnQrApp', [])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
