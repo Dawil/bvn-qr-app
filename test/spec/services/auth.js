@@ -2,21 +2,28 @@
 
 describe('auth service test', function() {
 	var auth;
+
 	beforeEach(module('bvnQrApp'));
 
 	beforeEach(inject(function($injector) {
 		auth = $injector.get('auth');
 	}));
 
-	it('should have a logIn method', function(){
-		expect( auth.logIn ).toBeDefined();
+	describe("logIn method", function(){
+		it('should be defined', function(){
+			expect( auth.logIn ).toBeDefined();
+		});
 	});
 
-	it('should have a logOut method', function(){
-		expect( auth.logOut ).toBeDefined();
+	describe("logOut method", function(){
+		it('should be defined', function(){
+			expect( auth.logOut ).toBeDefined();
+		});
 	});
 
-	it('should have an isLoggedIn method', function(){
-		expect( auth.isLoggedIn ).toBeDefined();
+	describe("isLoggedIn method", function(){
+		it('should be defined', function(){
+			expect( auth.isLoggedIn ).toBeDefined();
+		});
 	});
 });
