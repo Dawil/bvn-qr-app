@@ -16,17 +16,17 @@ module.exports = function( grunt ) {
       dir: 'app/components'
     },
 	
-	// Typescript to JS compilation
+		// Typescript to JS compilation
     typescript: {
-	  base: {
-		  src: ['app/scripts/**/*.ts', 'app/scripts/*/*.ts'],
-		  dest: 'app/scripts',
-		  options: {
-		    base_path: 'app/scripts',
-			sourcemap: true,
-			declaration: true
-		  }
-		}
+			base: {
+				src: ['app/scripts/**/*.ts', 'app/scripts/*/*.ts'],
+				dest: 'app/scripts',
+				options: {
+					base_path: 'app/scripts',
+				sourcemap: true,
+				declaration: true
+				}
+			}
     },
 
     // Coffee to JS compilation
