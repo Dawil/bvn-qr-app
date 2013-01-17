@@ -1,6 +1,13 @@
 Unresolved Problems
 ===================
 
+Yeoman Build Environments
+-------------------------
+
+Currently I cannot find a way to include differeing files between the development environment and the production build environmnet.
+
+The reason why I want to do this is so that I can have a different Google API client id for development and production.
+
 Resolved Problems
 =================
 
