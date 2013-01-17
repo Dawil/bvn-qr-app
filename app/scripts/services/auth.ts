@@ -2,15 +2,14 @@
 'use strict';
 
 interface IAuthService {
-  logIn: () => void;
+	logInUrl:string;
   logOut: () => void;
   isLoggedIn: () => bool;
 }
 
 bvnQrApp.factory('auth', function():IAuthService {
 	return {
-		logIn: () => {
-		},
+		logInUrl: "https://google.com", //TODO FIXME
 		logOut: () => {
 		},
 		isLoggedIn: () => {

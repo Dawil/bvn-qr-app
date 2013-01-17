@@ -5,13 +5,13 @@ var bvnQrApp = angular.module('bvnQrApp', [])
   .config(<any[]>['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-				redirectTo: '/log_in'
+				redirectTo: '/welcome'
       })
-			.when('/log_in', {
-				templateUrl: 'views/log_in.html',
-				controller: 'LogInCtrl'
+			.when('/welcome', {
+				templateUrl: 'views/welcome.html',
+				controller: 'WelcomeCtrl'
 			})
       .otherwise({
-        redirectTo: '/log_in'
+        redirectTo: '/welcome'
       });
   }]);

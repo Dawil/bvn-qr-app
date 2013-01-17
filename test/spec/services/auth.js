@@ -9,9 +9,9 @@ describe('auth service test', function() {
 		auth = $injector.get('auth');
 	}));
 
-	describe("logIn method", function(){
+	describe("logInUrl method", function(){
 		it('should be defined', function(){
-			expect( auth.logIn ).toBeDefined();
+			expect( auth.logInUrl ).toBeDefined();
 		});
 	});
 

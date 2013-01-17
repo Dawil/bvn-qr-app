@@ -11,7 +11,6 @@ files = [
   JASMINE_ADAPTER,
   'app/scripts/vendor/angular.js',
   'test/vendor/angular-mocks.js',
-  'test/vendor/sinon-1.5.2.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
   'test/spec/**/*.js'
@@ -26,7 +25,7 @@ exclude = [
 
 // test results reporter to use
 // possible values: dots || progress
-reporter = 'progress';
+reporter = 'dots';
 
 
 // web server port
@@ -57,7 +56,7 @@ autoWatch = true;
 // - Opera
 // - Safari
 // - PhantomJS
-browsers = ['PhantomJS'];
+browsers = [/*'PhantomJS'*/]; // apparently phantomjs is being loaded elsewhere as well
 
 
 // Continuous Integration mode
