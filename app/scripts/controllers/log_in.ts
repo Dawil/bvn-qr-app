@@ -5,8 +5,7 @@ interface ILogInScope extends ng.IScope {
 	logIn:() => void;
 }
 
-bvnQrApp.controller('LogInCtrl', <any[]>['$scope', function($scope:ILogInScope) {
-	$scope.logIn = () => {
-		alert("Hello");
-	};
+bvnQrApp.controller('LogInCtrl', <any[]>['$scope','auth',
+		function($scope:ILogInScope, auth) {
+	$scope.logIn = auth.logIn;
 }]);
