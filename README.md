@@ -21,7 +21,7 @@ SiteMap
 =======
 
     /										# Displays /login if not logged in, otherwise /sessions
-    /login							# Displays a login interface
+    /welcome						# Displays a login interface
     /sessions						# Displays a list of sessions and an option to create one
     /sessions/:id/show	# Displays an individual session
     /redirect						# The url that catches the google oauth redirect

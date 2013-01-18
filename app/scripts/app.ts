@@ -11,6 +11,10 @@ var bvnQrApp = angular.module('bvnQrApp', [])
 				templateUrl: 'views/welcome.html',
 				controller: 'WelcomeCtrl'
 			})
+			.when('/oauth2callback', {
+				templateUrl: 'views/oauth_2_callback.html',
+				controller: 'Oauth2CallbackCtrl'
+			})
       .otherwise({
         redirectTo: '/welcome'
       });
