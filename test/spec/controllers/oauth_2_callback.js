@@ -12,7 +12,7 @@ describe('Oauth2Callback controller test', function() {
 		routeParams = {};
 	}));
 
-	describe('scraping the location', function(){
+	describe('reading routeParams', function(){
 		// access token
 		// expires in
 		// token type
@@ -24,11 +24,13 @@ describe('Oauth2Callback controller test', function() {
 				error: "something"
 			};
 
-			Oauth2Callback = $controller('Oauth2CallbackCtrl', {
-				$scope: scope,
-				$routeParams: routeParams
+			Oauth2CallbackCtrl = inject(function($controller) {
+				$controller('Oauth2CallbackCtrl', {
+					$scope: scope,
+					$routeParams: routeParams
+				});
 			});
-			expect( $scope.status() ).toBe( 'error' );
+			expect( scope.status() ).toBe( 'error' );
 		});
 
 		it('should set status to receivingCallback if the location contains access_token', function(){
@@ -36,12 +38,14 @@ describe('Oauth2Callback controller test', function() {
 				access_token: "xdcgvbhnj"
 			};
 
-			Oauth2Callback = $controller('Oauth2CallbackCtrl', {
-				$scope: scope,
-				$routeParams: routeParams
+			Oauth2CallbackCtrl = inject(function($controller) {
+				$controller('Oauth2CallbackCtrl', {
+					$scope: scope,
+					$routeParams: routeParams
+				});
 			});
 
-			expect( $scope.status() ).toBe( 'receivingCallback' );
+			expect( scope.status() ).toBe( 'receivingCallback' );
 		});
 
 		it('should set status to invalidLocation if neither access_token or error are in the lcoation', function(){
@@ -50,12 +54,14 @@ describe('Oauth2Callback controller test', function() {
 				not_access_token: "derp"
 			};
 
-			Oauth2Callback = $controller('Oauth2CallbackCtrl', {
-				$scope: scope,
-				$routeParams: routeParams
+			Oauth2CallbackCtrl = inject(function($controller) {
+				$controller('Oauth2CallbackCtrl', {
+					$scope: scope,
+					$routeParams: routeParams
+				});
 			});
 
-			expect( $scope.status() ).toBe( 'invalidLocation' );
+			expect( scope.status() ).toBe( 'invalidLocation' );
 		});
 	});
 });

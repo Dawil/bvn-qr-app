@@ -9,6 +9,7 @@ interface IAuthService {
 
 bvnQrApp.factory('auth', <any[]>['$window',
 		function($window):IAuthService {
+	// create a url to direct the user to
 	var params = [ ["response_type"		, "token"]
 							 , ["client_id"				, "640956945398.apps.googleusercontent.com"]
 							 , ["redirect_uri"		, $window.escape("http://localhost:3501/oauth2callback")]
