@@ -50,8 +50,6 @@ describe('Oauth2Callback controller test', function() {
 
 		it('should set status to invalidLocation if neither access_token or error are in the lcoation', function(){
 			routeParams = {
-				not_error: "herp",
-				not_access_token: "derp"
 			};
 
 			Oauth2CallbackCtrl = inject(function($controller) {

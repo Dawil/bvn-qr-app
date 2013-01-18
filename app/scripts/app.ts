@@ -2,11 +2,9 @@
 'use strict';
 
 var bvnQrApp = angular.module('bvnQrApp', [])
-  .config(<any[]>['$routeProvider', function($routeProvider) {
+  .config(<any[]>['$routeProvider', '$locationProvider',
+			function($routeProvider, $locationProvider) {
     $routeProvider
-      .when('/', {
-				redirectTo: '/welcome'
-      })
 			.when('/welcome', {
 				templateUrl: 'views/welcome.html',
 				controller: 'WelcomeCtrl'
@@ -18,4 +16,5 @@ var bvnQrApp = angular.module('bvnQrApp', [])
       .otherwise({
         redirectTo: '/welcome'
       });
+		$locationProvider.html5Mode(true);
   }]);

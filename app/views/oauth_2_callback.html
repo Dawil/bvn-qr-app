@@ -1,0 +1,10 @@
+<div ng-show="status() == 'error'">
+	<p>Error</p>
+</div>
+<div ng-show="status() == 'receivingCallback'">
+	<p>Processing...</p>
+</div>
+<div ng-show="status() == 'invalidLocation'">
+	<p>Invalid URL parameters.</p>
+	<a class="btn btn-primary" href="/">Go Home</a>
+</div>
