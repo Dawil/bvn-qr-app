@@ -23,8 +23,8 @@ module.exports = function( grunt ) {
 				dest: 'app/scripts',
 				options: {
 					base_path: 'app/scripts',
-				sourcemap: true,
-				declaration: true
+					sourcemap: true,
+					declaration: true
 				}
 			}
     },
