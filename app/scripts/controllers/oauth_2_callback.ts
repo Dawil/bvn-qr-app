@@ -6,7 +6,7 @@ interface IOauth2CallbackScope extends ng.IScope {
 }
 
 bvnQrApp.controller('Oauth2CallbackCtrl', <any[]>['$scope','$routeParams',
-		function($scope:IOauth2CallbackScope, $routeParams) {
+		function($scope:IOauth2CallbackScope, $routeParams:ng.IRouteParamsService) {
 	$scope.status = () => {
 		if ($routeParams.error) {
 			return 'error';
