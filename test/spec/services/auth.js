@@ -25,5 +25,9 @@ describe('auth service test', function() {
 		it('should be defined', function(){
 			expect( auth.isLoggedIn ).toBeDefined();
 		});
+
+		it('should have an access token if logged in', function(){
+			expect( auth.accessToken ).toBeDefined();
+		});
 	});
 });

@@ -9,6 +9,10 @@ var bvnQrApp = angular.module('bvnQrApp', [])
 				templateUrl: 'views/welcome.html',
 				controller: 'WelcomeCtrl'
 			})
+			.when('/sessions', {
+				templateUrl: 'views/sessions.html',
+				controller: 'SessionsCtrl'
+			})
 			.when('/oauth2callback', {
 				templateUrl: 'views/oauth_2_callback.html',
 				controller: 'Oauth2CallbackCtrl'
