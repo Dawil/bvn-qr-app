@@ -16,5 +16,4 @@ var bvnQrApp = angular.module('bvnQrApp', [])
       .otherwise({
         redirectTo: '/welcome'
       });
-		$locationProvider.html5Mode(true);
   }]);
