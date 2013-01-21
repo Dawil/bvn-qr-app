@@ -1,6 +1,15 @@
 Unresolved Problems
 ===================
 
+Confused Deputy Problem and Unvalidated Access Tokens
+-----------------------------------------------------
+
+As per
+
+    https://developers.google.com/accounts/docs/OAuth2UserAgent
+
+we are not yet validating the token to mitigate the Confused Deputy Problem.
+
 Yeoman Build Environments
 -------------------------
 
