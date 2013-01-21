@@ -5,11 +5,11 @@ interface IAuthService {
 	logInUrl:string;
   logOut: () => void;
   isLoggedIn: () => bool;
-	accessToken: string;
+	accessToken: (string) => any;
 }
 
-bvnQrApp.factory('auth', <any[]>['$window',
-		function($window):IAuthService {
+bvnQrApp.factory('auth', <any[]>['$window', '$cookieStore',
+		function($window, $cookieStore):IAuthService {
 	// create a url to direct the user to
 	var scope = ["https://spreadsheets.google.com/feeds/",
 							 "https://www.googleapis.com/auth/drive.file"].join(" "),
@@ -28,6 +28,12 @@ bvnQrApp.factory('auth', <any[]>['$window',
 		},
 		isLoggedIn: () => {
 		},
-		accessToken: null
-	};
+		accessToken: function(token) {
+			if (token) {
+				return $cookieStore.put('accessToken', token);
+			} else {
+				return $cookieStore.get('accessToken');
+			}
+		}
+};
 }]);

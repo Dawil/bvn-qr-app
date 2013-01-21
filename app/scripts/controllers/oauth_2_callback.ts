@@ -19,7 +19,7 @@ bvnQrApp.controller('Oauth2CallbackCtrl',
 	};
 
 	if ($scope.status() == 'receivingCallback') {
-		auth.accessToken = $routeParams.access_token;
+		auth.accessToken( $routeParams.access_token );
 		$location.path('/sessions');
 	} else {
 		$location.path('/welcome');
