@@ -10,10 +10,10 @@ console.log(result);                }, fail = function (error) {
 console.log(error);                };
                 $http.get(API_URL + "/files?access_token=" + accessToken, {
                     headers: {
-                        'Authorization': 'Bearer ' + accessToken
+                        'Authorization': 'Bearer ' + accessToken,
+                        'user-agent': 'blah blah blah'
                     }
                 }).then(success, fail);
             }
         };
     }]);
-//@ sourceMappingURL=spreadsheets.js.map

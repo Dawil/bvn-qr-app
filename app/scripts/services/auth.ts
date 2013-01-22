@@ -12,9 +12,9 @@ bvnQrApp.factory('auth',
 		<any[]>['$window', '$cookieStore',
 		function($window, $cookieStore):IAuthService {
 	// create a url to direct the user to
-	var env = $window.location.origin.search('localhost') == 1 ?
-						'development' : 'production',
-			clientId = env == 'devlopment' ?
+	var env = $window.location.origin.search('localhost') != -1 ?
+						'dev' : 'prod',
+			clientId = env == 'dev' ?
 						"640956945398.apps.googleusercontent.com" :
 						"640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com",
 			redirectUri = $window.location.origin
@@ -31,6 +31,7 @@ bvnQrApp.factory('auth',
 			paramsString = params.map( (keyValue) => keyValue.join("=") ).join("&"),
 			baseUrl = "https://accounts.google.com/o/oauth2/auth",
 			googleApiUrl = [baseUrl, paramsString].join("?");
+	console.log(env,clientId);
 	return {
 		logInUrl: googleApiUrl,
 		logOut: () => {

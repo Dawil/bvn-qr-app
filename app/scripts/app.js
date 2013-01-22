@@ -18,4 +18,3 @@ var bvnQrApp = angular.module('bvnQrApp', [
             redirectTo: '/welcome'
         });
     }]);
-//@ sourceMappingURL=app.js.map
