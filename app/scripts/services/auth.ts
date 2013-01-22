@@ -8,14 +8,15 @@ interface IAuthService {
 	accessToken: (string) => any;
 }
 
-bvnQrApp.factory('auth', <any[]>['$window', '$cookieStore',
-		function($window, $cookieStore):IAuthService {
+bvnQrApp.factory('auth',
+		<any[]>['$window', '$cookieStore', '$location',
+		function($window, $cookieStore, $location):IAuthService {
 	// create a url to direct the user to
 	var scope = ["https://spreadsheets.google.com/feeds/",
 							 "https://www.googleapis.com/auth/drive.file"].join(" "),
 			params = [ ["response_type"		, "token"]
 							 , ["client_id"				, "640956945398.apps.googleusercontent.com"]
-							 , ["redirect_uri"		, $window.escape("http://localhost:3501/oauth2callback.html")]
+							 , ["redirect_uri"		, $window.escape($location.origin + "/oauth2callback.html")]
 							 , ["scope"						, $window.escape(scope)]
 							 , ["approval_prompt"	, "auto"]
 							 ],
