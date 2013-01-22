@@ -2,15 +2,26 @@
 'use strict';
 
 interface ISessionsScope {
-	sessionSheet: ng.IPromise;
+	sessionSheet: any;
+	formSheet: any;
+	sessionRows: any;
 }
 
 bvnQrApp.controller('SessionsCtrl',
 		<any[]>['$scope', 'auth', 'spreadsheets',
 		function($scope, auth, spreadsheets) {
-			spreadsheets.getSessionSpreadsheet(auth.accessToken())
-				.then((result) => { $scope.sessionSheet = result; console.log(result) },
-							(error) =>  { console.log(error) });
+			spreadsheets.getSpreadsheetData(auth.accessToken())
+				.then((result) => {
+					$scope.sessionSheet = result.attendanceSheet;
+					$scope.formSheet = result.formSheet;
+					console.log(result);
+					spreadsheets.getRows($scope.sessionSheet,
+						auth.accessToken())
+						.then((result) => {
+								console.log(result);
+								$scope.sessionRows = result.data.feed.entry;
+							}, (error) => { console.log(error) });
+				}, (error) =>  { console.log(error) });
 		}
 	]
 );

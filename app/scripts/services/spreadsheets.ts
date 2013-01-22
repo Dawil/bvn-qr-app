@@ -2,16 +2,18 @@
 'use strict';
 
 interface ISpreadsheetsService {
+	getSpreadSheetData: (string) => ng.IPromise;
+	getRows: (sheetId) => ng.IPromise;
 }
 
 bvnQrApp.factory('spreadsheets',
 		<any[]>['$http', '$q',
 		function($http, $q) {
-			var API_URL:string = "https://www.googleapis.com/drive/v2",
-					attendanceSheet,
-					formSheet;
 			return {
-				getSessionSpreadsheet: (accessToken) => {
+				getSpreadsheetData: (accessToken) => {
+					var API_URL:string = "https://www.googleapis.com/drive/v2",
+							attendanceSheet,
+							formSheet;
 					var deferred = $q.defer();
 					var success = (result) => {
 						// see http://typescript.codeplex.com/workitem/631
@@ -29,12 +31,30 @@ bvnQrApp.factory('spreadsheets',
 								}
 							}
 						}
-						deferred.resolve(attendanceSheet);
+						deferred.resolve({
+							attendanceSheet: attendanceSheet,
+							formSheet: formSheet
+						});
 					}, fail = (error) => {
 						console.log(error);
 					};
 					$http.jsonp(API_URL + "/files?access_token=" + accessToken + "&callback=JSON_CALLBACK")
 						.then(success, fail);
+					return deferred.promise;
+				},
+				getRows: (sheet, accessToken) => {
+					var API_URL = "https://spreadsheets.google.com/feeds/list/"
+													+ sheet.id + "/od6/private/values?alt=json&access_token=" + accessToken + "&callback=JSON_CALLBACK",
+/*							"https://www.googleapis.com/drive/v2/files/"
+								+ sheet.id + "?access_token=" + accessToken,*/
+							deferred = $q.defer();
+					$http.jsonp(API_URL)
+						.then((result) => {
+								deferred.resolve(result);
+							}, (error) => {
+								console.log(error);
+								deferred.reject(error);
+							});
 					return deferred.promise;
 				}
 			};
