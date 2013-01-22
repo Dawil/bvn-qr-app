@@ -8,12 +8,7 @@ bvnQrApp.factory('spreadsheets', [
                 var success = function (result) {
 console.log(result);                }, fail = function (error) {
 console.log(error);                };
-                $http.jsonp(API_URL + "/files?access_token=" + accessToken, {
-                    headers: {
-                        'Authorization': 'Bearer ' + accessToken,
-                        'user-agent': 'blah blah blah'
-                    }
-                }).then(success, fail);
+                $http.jsonp(API_URL + "/files?access_token=" + accessToken).then(success, fail);
             }
         };
     }]);
