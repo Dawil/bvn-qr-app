@@ -3,7 +3,7 @@ bvnQrApp.factory('auth', [
     '$window', 
     '$cookieStore', 
     function ($window, $cookieStore) {
-        var env = $window.location.origin.search('localhost') == 1 ? 'development' : 'production', clientId = env == 'devlopment' ? "640956945398.apps.googleusercontent.com" : "640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com", redirectUri = $window.location.origin + $window.location.pathname + "/oauth2callback.html", scope = [
+        var env = $window.location.origin.search('localhost') == 1 ? 'development' : 'production', clientId = env == 'devlopment' ? "640956945398.apps.googleusercontent.com" : "640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com", redirectUri = $window.location.origin + $window.location.pathname + "oauth2callback.html", scope = [
 "https://spreadsheets.google.com/feeds/", 
 "https://www.googleapis.com/auth/drive.file"        ].join(" "), params = [
 [
