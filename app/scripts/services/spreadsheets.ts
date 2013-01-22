@@ -15,7 +15,8 @@ bvnQrApp.factory('spreadsheets',
 					}, fail = (error) => {
 						console.log(error);
 					};
-					$http.get(API_URL + "/files?access_token=" + accessToken)
+					$http.get(API_URL + "/files?access_token=" + accessToken,
+						{	headers: { 'Authorization': 'Bearer ' + accessToken } })
 						.then(success, fail);
 				}
 			};
