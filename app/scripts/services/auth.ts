@@ -14,7 +14,7 @@ bvnQrApp.factory('auth',
 	// create a url to direct the user to
 	var env = $location.origin.search('localhost') == 1 ?
 						'development' : 'production',
-			clientID = env == 'devlopment' ?
+			clientId = env == 'devlopment' ?
 						"640956945398.apps.googleusercontent.com" :
 						"640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com",
 			scope = ["https://spreadsheets.google.com/feeds/",
