@@ -2,9 +2,8 @@
 bvnQrApp.factory('auth', [
     '$window', 
     '$cookieStore', 
-    '$location', 
-    function ($window, $cookieStore, $location) {
-        var env = $location.origin.search('localhost') == 1 ? 'development' : 'production', clientId = env == 'devlopment' ? "640956945398.apps.googleusercontent.com" : "640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com", scope = [
+    function ($window, $cookieStore) {
+        var env = $window.location.origin.search('localhost') == 1 ? 'development' : 'production', clientId = env == 'devlopment' ? "640956945398.apps.googleusercontent.com" : "640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com", redirectUri = $window.location.origin + $window.location.pathname + "/oauth2callback.html", scope = [
 "https://spreadsheets.google.com/feeds/", 
 "https://www.googleapis.com/auth/drive.file"        ].join(" "), params = [
 [
@@ -15,7 +14,7 @@ bvnQrApp.factory('auth', [
 clientId            ], 
 [
 "redirect_uri", 
-$window.escape($location.origin + "/oauth2callback.html")            ], 
+$window.escape(redirectUri)            ], 
 [
 "scope", 
 $window.escape(scope)            ], 
