@@ -19,7 +19,7 @@ bvnQrApp.factory('auth',
 						"640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com",
 			redirectUri = $window.location.origin
 									+ $window.location.pathname
-									+ "/oauth2callback.html",
+									+ "oauth2callback.html",
 			scope = ["https://spreadsheets.google.com/feeds/",
 							 "https://www.googleapis.com/auth/drive.file"].join(" "),
 			params = [ ["response_type"		, "token"]
