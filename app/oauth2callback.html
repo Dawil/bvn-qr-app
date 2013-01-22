@@ -16,7 +16,7 @@
 			<script type="text/javascript">
 				var params = window.location.hash.slice(1);
 				window.location =
-					window.location.origin + "/#/oauth2callback?"
+					window.location.origin + window.location.pathname +  "#/oauth2callback?"
 					+ params;
 			</script>
     </body>
