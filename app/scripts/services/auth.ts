@@ -12,10 +12,15 @@ bvnQrApp.factory('auth',
 		<any[]>['$window', '$cookieStore', '$location',
 		function($window, $cookieStore, $location):IAuthService {
 	// create a url to direct the user to
-	var scope = ["https://spreadsheets.google.com/feeds/",
+	var env = $location.origin.search('localhost') == 1 ?
+						'development' : 'production',
+			clientID = env == 'devlopment' ?
+						"640956945398.apps.googleusercontent.com" :
+						"640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com",
+			scope = ["https://spreadsheets.google.com/feeds/",
 							 "https://www.googleapis.com/auth/drive.file"].join(" "),
 			params = [ ["response_type"		, "token"]
-							 , ["client_id"				, "640956945398.apps.googleusercontent.com"]
+							 , ["client_id"				, clientId]
 							 , ["redirect_uri"		, $window.escape($location.origin + "/oauth2callback.html")]
 							 , ["scope"						, $window.escape(scope)]
 							 , ["approval_prompt"	, "auto"]
