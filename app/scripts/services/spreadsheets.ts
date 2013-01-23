@@ -6,6 +6,7 @@ interface ISpreadsheetsService {
 	getRows: any;
 	getSpreadsheet: any;
 	getFormSheet: any;
+	addRow: (string) => ng.IPromise;
 }
 
 bvnQrApp.factory('spreadsheets',
@@ -15,6 +16,7 @@ bvnQrApp.factory('spreadsheets',
 				metaData: null,
 				rows: null
 			}, _formSheet,
+			worksheetId = "od6", // hardcoded to the first worksheet
 			loadSpreadsheetData = (accessToken) => {
 				var console, console;
 				var API_URL:string = "https://www.googleapis.com/drive/v2";
@@ -49,7 +51,7 @@ bvnQrApp.factory('spreadsheets',
 			}, loadRows = (sheet, accessToken) => {
 				console.log(sheet);
 				var API_URL = "https://spreadsheets.google.com/feeds/list/"
-												+ sheet.id + "/od6/private/values?alt=json&access_token=" + accessToken + "&callback=JSON_CALLBACK",
+												+ sheet.id + "/" + worksheetId + "/private/values?alt=json&access_token=" + accessToken + "&callback=JSON_CALLBACK",
 						deferred = $q.defer();
 				$http.jsonp(API_URL)
 					.then((result) => {
@@ -82,6 +84,28 @@ bvnQrApp.factory('spreadsheets',
 					return _attendanceSheet.metaData;
 				}, getFormSheet: () => {
 					return _formSheet;
+				}, addRow: (row, accessToken) => {
+					var deferred = $q.defer();
+					var	body = '<entry xmlns="http://www.w3.org/2005/Atom"' +
+													'xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">' +
+												'<gsx:Person>' + row + '</gsx:Person>' +
+											'</entry>';
+					var metaData = _attendanceSheet.metaData;
+					var API_URL = "https://spreadsheets.google.com/feeds/list/" +
+								metaData['id'] + "/" + worksheetId + "/private/full" +
+								"?access_token=" + accessToken + "&callback=JSON_CALLBACK";
+					$http.jsonp({
+						method: 'POST',
+						data: body,
+						url: API_URL
+					}).then((result) => {
+						console.log(result);
+						deferred.resolve( result );
+					}, (error) => {
+						console.log( error );
+						deferred.reject( error );
+					});
+					return deferred.promise;
 				}
 			};
 		}

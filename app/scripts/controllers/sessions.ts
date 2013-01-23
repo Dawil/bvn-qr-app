@@ -5,6 +5,8 @@ interface ISessionsScope {
 	sessionSheet: any;
 	formSheet: any;
 	sessionRows: any;
+	addRow: () => void;
+	newAttendee: string;
 }
 
 bvnQrApp.controller('SessionsCtrl',
@@ -15,6 +17,10 @@ bvnQrApp.controller('SessionsCtrl',
 			$scope.getRows = spreadsheets.getRows;
 			$scope.getSpreadsheet = spreadsheets.getSpreadsheet;
 			$scope.getFormSheet = spreadsheets.getFormSheet;
+
+			$scope.addRow = () => {
+				spreadsheets.addRow($scope.newAttendee, auth.accessToken());
+			};
 		}
 	]
 );

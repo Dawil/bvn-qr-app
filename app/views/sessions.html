@@ -9,8 +9,13 @@
 </div>
 <div ng-show="!!getRows()">
 	<h4>Marked as Attending:</h4>
+	<form>
+		<input type="text" ng-model="newAttendee" value="New Attendee">
+		<input type="button" ng-click="addRow()" value="Add">
+	</form>
 	<ul>
 		<li ng-repeat="attendee in getRows().data.feed.entry">
 			{{ attendee.title.$t }}
 		</li>
+	</ul>
 </div>
