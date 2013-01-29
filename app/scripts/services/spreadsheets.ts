@@ -86,18 +86,25 @@ bvnQrApp.factory('spreadsheets',
 					return _formSheet;
 				}, addRow: (row, accessToken) => {
 					var deferred = $q.defer();
-					var	body = '<entry xmlns="http://www.w3.org/2005/Atom"' +
+					var	body = '<entry xmlns="http://www.w3.org/2005/Atom" ' +
 													'xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">' +
-												'<gsx:Person>' + row + '</gsx:Person>' +
+												'<gsx:person>' + row + '</gsx:person>' +
 											'</entry>';
 					var metaData = _attendanceSheet.metaData;
-					var API_URL = "https://spreadsheets.google.com/feeds/list/" +
+					var API_URL = "https://spreadsheets.google.com";
+					var API_URL_PATH = "/feeds/list/" +
 								metaData['id'] + "/" + worksheetId + "/private/full" +
-								"?access_token=" + accessToken + "&callback=JSON_CALLBACK";
-					$http.jsonp({
+								"?access_token=" + accessToken;
+					var proxyBody = {
+						'url_host': API_URL,
+						'url_path': API_URL_PATH,
+						body: body
+					};
+					var proxyUrl = "http://localhost:3000/proxy/bounce.json";
+					$http({
 						method: 'POST',
-						data: body,
-						url: API_URL
+						data: proxyBody,
+						url: proxyUrl
 					}).then((result) => {
 						console.log(result);
 						deferred.resolve( result );
