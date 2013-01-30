@@ -10,8 +10,8 @@ interface ISessionsScope {
 }
 
 bvnQrApp.controller('SessionsCtrl',
-		<any[]>['$scope', 'auth', 'spreadsheets',
-		function($scope, auth, spreadsheets) {
+		<any[]>['$scope', 'auth', 'spreadsheets', 'qrReader',
+		function($scope, auth, spreadsheets, qrReader) {
 			spreadsheets.syncData(auth.accessToken());
 
 			$scope.getRows = spreadsheets.getRows;
@@ -20,6 +20,11 @@ bvnQrApp.controller('SessionsCtrl',
 
 			$scope.addRow = () => {
 				spreadsheets.addRow($scope.newAttendee, auth.accessToken());
+			};
+
+			$scope.scanQr = (image) => {
+				var file = image.files[0];
+				qrReader.scanQr( file );
 			};
 		}
 	]

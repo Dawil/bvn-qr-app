@@ -19,3 +19,9 @@
 		</li>
 	</ul>
 </div>
+<div>
+	<p>Add new attendee:</p>
+	<input onchange="angular.element(this).scope().scanQr(this)"
+ 			id="input" type="file" accept="image/*" />
+	<canvas id="canvas" class="hidden"/>
+</div>
