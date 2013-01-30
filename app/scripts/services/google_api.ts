@@ -1,15 +1,26 @@
 /// <reference path="../main.ts" />
 'use strict';
 
+interface IGoogleApiUrlService {
+	drive: () => GoogleDriveUrl;
+	spreadsheets: () => GoogleSpreadsheetsUrl;
+}
+
 /**
  * This service encapsulates the url construction for Google Spreadsheet API
  * calls. Its purpose is to make sure that no string manipulation of URLs
  * involving the google API occurs outside this service.
  */
-interface IGoogleApiUrlService {
-	drive: () => GoogleDriveUrl;
-	spreadsheets: () => GoogleSpreadsheetsUrl;
-}
+bvnQrApp.factory('googleApiUrl',
+		<any[]>[
+		function():IGoogleApiUrlService {
+			return {
+				drive: () => new GoogleDriveUrl(),
+				spreadsheets: () => new GoogleSpreadsheetsUrl()
+			};
+		}
+	]
+);
 
 class GoogleApiUrl {
 	_url:string;
@@ -93,14 +104,3 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 		}
 	}
 }
-
-bvnQrApp.factory('googleApiUrl',
-		<any[]>[
-		function():IGoogleApiUrlService {
-			return {
-				drive: () => new GoogleDriveUrl(),
-				spreadsheets: () => new GoogleSpreadsheetsUrl()
-			};
-		}
-	]
-);
