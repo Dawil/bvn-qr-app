@@ -8,24 +8,20 @@ interface ISpreadsheetsService {
 	getFormSheet: any;
 	addRow: (string) => ng.IPromise;
 }
-
+function f(){}
 bvnQrApp.factory('spreadsheets',
-		<any[]>['$http', '$q',
-		function($http, $q) {
+		<any[]>['$http', '$q', 'bvnProxy', 'googleApiUrl',
+		function($http, $q, bvnProxy, googleApiUrl) {
+			var f,f;
 			var _attendanceSheet = {
 				metaData: null,
 				rows: null
-			}, _formSheet,
-			worksheetId = "od6", // hardcoded to the first worksheet
-			loadSpreadsheetData = (accessToken) => {
-				var console, console;
-				var API_URL:string = "https://www.googleapis.com/drive/v2";
+			}, _formSheet;
+			var loadSpreadsheetData = (accessToken) => {
+				var f, f;
 				var deferred = $q.defer();
 				var success = (result) => {
-					// see http://typescript.codeplex.com/workitem/631
-					// aka triple redundancy!!
-					var console;
-					var console;
+					var f, f;
 					var sheets = result.data.items;
 					var formSheet, attendanceSheetMetaData;
 
@@ -45,15 +41,20 @@ bvnQrApp.factory('spreadsheets',
 				}, fail = (error) => {
 					console.log(error);
 				};
-				$http.jsonp(API_URL + "/files?access_token=" + accessToken + "&callback=JSON_CALLBACK")
+				var url = googleApiUrl.drive().files().authenticate( accessToken )
+					.toFullUrl() + "&callback=JSON_CALLBACK";
+				$http.jsonp( url )
 					.then(success, fail);
 				return deferred.promise;
 			}, loadRows = (sheet, accessToken) => {
-				console.log(sheet);
-				var API_URL = "https://spreadsheets.google.com/feeds/list/"
-												+ sheet.id + "/" + worksheetId + "/private/values?alt=json&access_token=" + accessToken + "&callback=JSON_CALLBACK",
-						deferred = $q.defer();
-				$http.jsonp(API_URL)
+				var urlAndParams = googleApiUrl.spreadsheets()
+					.sheet( sheet.id )
+					.authenticate( accessToken )
+					.as_json()
+					.toUrlAndParams();
+				var deferred = $q.defer();
+				$http.jsonp(urlAndParams.url + "?callback=JSON_CALLBACK",
+						{ params: urlAndParams.params })
 					.then((result) => {
 							deferred.resolve(result);
 						}, (error) => {
@@ -68,7 +69,6 @@ bvnQrApp.factory('spreadsheets',
 					var deferred = $q.defer();
 					loadSpreadsheetData(accessToken)
 						.then((result) => {
-							console.log(result);
 							_attendanceSheet.metaData = result.attendanceSheetMetaData;
 							_formSheet = result.formSheet;
 							loadRows(_attendanceSheet.metaData, accessToken)
@@ -93,7 +93,7 @@ bvnQrApp.factory('spreadsheets',
 					var metaData = _attendanceSheet.metaData;
 					var API_URL = "https://spreadsheets.google.com";
 					var API_URL_PATH = "/feeds/list/" +
-								metaData['id'] + "/" + worksheetId + "/private/full" +
+								metaData['id'] + "/" + "/private/full" +
 								"?access_token=" + accessToken;
 					var proxyBody = {
 						'url_host': API_URL,

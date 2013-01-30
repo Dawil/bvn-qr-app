@@ -48,6 +48,16 @@ class GoogleApiUrl {
 		}
 		return urlAndParams
 	}
+
+	toFullUrl():string {
+		var urlAndParams = this.toUrlAndParams();
+		if ( urlAndParams.params['access_token'] ) {
+			return urlAndParams.url + '?access_token=' +
+				urlAndParams.params['access_token'];
+		} else {
+			return urlAndParams.url;
+		}
+	}
 }
 
 class GoogleDriveUrl extends GoogleApiUrl {
@@ -78,6 +88,7 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 	_worksheetId:string;
 	_privateOrPublic:string;
 	_fullOrBasic:string;
+	_json:bool;
 
 	constructor() {
 		super();
@@ -97,6 +108,11 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 		return this;
 	}
 
+	as_json(flag=true) {
+		this._json = flag;
+		return this;
+	}
+
 	suffix() {
 		return [this._worksheetId, this._privateOrPublic, this._fullOrBasic]
 			.join('/');
@@ -110,6 +126,10 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 		} else {
 			url = this._url;
 		}
-		return { url: url, params: {} };
+		var params = {};
+		if ( this._json ) {
+			params['alt'] = 'json';
+		}
+		return { url: url, params: params };
 	}
 }
