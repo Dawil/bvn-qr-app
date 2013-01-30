@@ -108,7 +108,7 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 		return this;
 	}
 
-	as_json(flag=true) {
+	asJson(flag=true) {
 		this._json = flag;
 		return this;
 	}

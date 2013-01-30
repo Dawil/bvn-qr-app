@@ -8,7 +8,7 @@ interface ISpreadsheetsService {
 	getFormSheet: any;
 	addRow: (string) => ng.IPromise;
 }
-function f(){}
+function f(){} // used to dodge typescript compiler bug
 bvnQrApp.factory('spreadsheets',
 		<any[]>['$http', '$q', 'bvnProxy', 'googleApiUrl',
 		function($http, $q, bvnProxy, googleApiUrl) {
@@ -18,10 +18,10 @@ bvnQrApp.factory('spreadsheets',
 				rows: null
 			}, _formSheet;
 			var loadSpreadsheetData = (accessToken) => {
-				var f, f;
+				var f,f;
 				var deferred = $q.defer();
 				var success = (result) => {
-					var f, f;
+					var f,f;
 					var sheets = result.data.items;
 					var formSheet, attendanceSheetMetaData;
 
@@ -50,7 +50,7 @@ bvnQrApp.factory('spreadsheets',
 				var urlAndParams = googleApiUrl.spreadsheets()
 					.sheet( sheet.id )
 					.authenticate( accessToken )
-					.as_json()
+					.asJson()
 					.toUrlAndParams();
 				var deferred = $q.defer();
 				$http.jsonp(urlAndParams.url + "?callback=JSON_CALLBACK",
@@ -91,21 +91,17 @@ bvnQrApp.factory('spreadsheets',
 												'<gsx:person>' + row + '</gsx:person>' +
 											'</entry>';
 					var metaData = _attendanceSheet.metaData;
-					var API_URL = "https://spreadsheets.google.com";
-					var API_URL_PATH = "/feeds/list/" +
-								metaData['id'] + "/" + "/private/full" +
-								"?access_token=" + accessToken;
-					var proxyBody = {
-						'url_host': API_URL,
-						'url_path': API_URL_PATH,
-						body: body
-					};
-					var proxyUrl = "http://localhost:3000/proxy/bounce.json";
-					$http({
+					var urlAndParams = googleApiUrl.spreadsheets()
+						.sheet( metaData['id'] )
+						.authenticate( accessToken )
+						.asJson()
+						.toUrlAndParams();
+					$http( bvnProxy.translate({
 						method: 'POST',
-						data: proxyBody,
-						url: proxyUrl
-					}).then((result) => {
+						data: body,
+						url: urlAndParams.url,
+						params: urlAndParams.params
+					})).then((result) => {
 						console.log(result);
 						deferred.resolve( result );
 					}, (error) => {

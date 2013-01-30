@@ -9,6 +9,9 @@
  * It injects the $location service so that it can send to different URLS
  * depending upon the environment (i.e. localhost in dev, heroku in
  * production).
+ *
+ * It is recommended to use JSONP if you only need a GET request. JSONP will
+ * have a much reduced latency due to the lack of an extra request call.
  */
 interface IBvnProxyService {
 	translate: (config:ng.IRequestConfig) => ng.IRequestConfig;
@@ -24,11 +27,11 @@ bvnQrApp.factory('bvnProxy',
 					var targetUrl = config.url;
 					config.url = PROXY_URL;
 					if (config.method === 'GET') {
-						config.params['target_uri'] = config.url;
+						config.params['target_url'] = targetUrl;
 					} else if (config.method === 'POST') {
 						var data = config.data;
 						config.data = {
-							'target_uri': config.url,
+							'target_url': targetUrl,
 							data: data
 						};
 					}
