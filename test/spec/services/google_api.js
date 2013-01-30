@@ -15,13 +15,19 @@ describe('google api service test', function() {
 			drive = googleApiUrl.drive();
 		});
 
+		it('should authenticate', function(){
+			var accessToken = "super secrect key";
+			expect( drive.authenticate( accessToken ).toUrlAndParams()
+				.params['access_token'] ).toBe( accessToken );
+		});
+
 		it('should set the correct base url', function(){
-			expect( drive.toString() )
+			expect( drive.toUrlAndParams().url )
 				.toBe( "https://www.googleapis.com/drive/v2" );
 		});
 
 		it('should set the correct files url', function(){
-			expect( drive.files().toString() )
+			expect( drive.files().toUrlAndParams().url )
 				.toBe( "https://www.googleapis.com/drive/v2/files" );
 		});
 	});
@@ -33,8 +39,14 @@ describe('google api service test', function() {
 			spreadsheets = googleApiUrl.spreadsheets();
 		});
 
+		it('should authenticate', function(){
+			var accessToken = "super secrect key";
+			expect( spreadsheets.authenticate( accessToken ).toUrlAndParams()
+				.params['access_token'] ).toBe( accessToken );
+		});
+
 		it('should set the correct base url', function(){
-			expect( spreadsheets.toString() )
+			expect( spreadsheets.toUrlAndParams().url )
 				.toBe( "https://spreadsheets.google.com/feeds/list" );
 		});
 
@@ -47,7 +59,7 @@ describe('google api service test', function() {
 			});
 
 			it('should automatically append the suffix if sheet is defined', function(){
-				expect( sheet.toString().search( "od6/private/full" ) > -1 )
+				expect( sheet.toUrlAndParams().url.search( "od6/private/full" ) > -1 )
 					.toBe( true );
 			});
 
@@ -59,17 +71,17 @@ describe('google api service test', function() {
 				});
 
 				it('should add worksheet ids correctly', function(){
-					expect( worksheet.toString().search( "baab" ) > -1 )
+					expect( worksheet.toUrlAndParams().url.search( "baab" ) > -1 )
 						.toBe( true );
 				});
 
 				it('should set private by default', function(){
-					expect( worksheet.toString().search( "private" ) > -1 )
+					expect( worksheet.toUrlAndParams().url.search( "private" ) > -1 )
 						.toBe( true );
 				});
 
 				it('should set full by default', function(){
-					expect( worksheet.toString().search( "full" ) > -1 )
+					expect( worksheet.toUrlAndParams().url.search( "full" ) > -1 )
 						.toBe( true );
 				});
 			});

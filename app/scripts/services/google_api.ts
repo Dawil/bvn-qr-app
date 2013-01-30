@@ -1,11 +1,6 @@
 /// <reference path="../main.ts" />
 'use strict';
 
-interface IGoogleApiUrlService {
-	drive: () => GoogleDriveUrl;
-	spreadsheets: () => GoogleSpreadsheetsUrl;
-}
-
 /**
  * This service encapsulates the url construction for Google Spreadsheet API
  * calls. Its purpose is to make sure that no string manipulation of URLs
@@ -22,6 +17,16 @@ bvnQrApp.factory('googleApiUrl',
 	]
 );
 
+interface IGoogleApiUrlService {
+	drive: () => GoogleDriveUrl;
+	spreadsheets: () => GoogleSpreadsheetsUrl;
+}
+
+interface UrlAndParams {
+	url:string;
+	params:any;
+}
+
 class GoogleApiUrl {
 	_url:string;
 	_accessToken:string;
@@ -32,16 +37,16 @@ class GoogleApiUrl {
 		return this;
 	}
 
-	_toString():string {
-		return this._url;
+	_toUrlAndParams():UrlAndParams {
+		return  { url: this._url, params: {} };
 	}
 
-	toString():string {
+	toUrlAndParams():UrlAndParams {
+		var urlAndParams = this._toUrlAndParams();
 		if (this._accessToken) {
-			return this._toString() + "?access_token=" + this._accessToken;
-		} else {
-			return this._toString();
+			urlAndParams.params['access_token'] = this._accessToken;
 		}
+		return urlAndParams
 	}
 }
 
@@ -57,12 +62,14 @@ class GoogleDriveUrl extends GoogleApiUrl {
 		return this;
 	}
 
-	_toString() {
+	_toUrlAndParams():UrlAndParams {
+		var url;
 		if (this._files) {
-			return [this._url, this._files].join("/");
+			url = [this._url, this._files].join("/");
 		} else {
-			return this._url;
+			url = this._url;
 		}
+		return { url: url, params: {} };
 	}
 }
 
@@ -95,12 +102,14 @@ class GoogleSpreadsheetsUrl extends GoogleApiUrl {
 			.join('/');
 	}
 
-	_toString() {
+	_toUrlAndParams():UrlAndParams {
+		var url;
 		if (this._sheetId) {
-			return [this._url, this._sheetId, this.suffix()]
+			url = [this._url, this._sheetId, this.suffix()]
 								.join("/");
 		} else {
-			return this._url;
+			url = this._url;
 		}
+		return { url: url, params: {} };
 	}
 }
