@@ -85,6 +85,7 @@ bvnQrApp.factory('spreadsheets',
 				}, getFormSheet: () => {
 					return _formSheet;
 				}, addRow: (row, accessToken) => {
+					var f,f;
 					var deferred = $q.defer();
 					var	body = '<entry xmlns="http://www.w3.org/2005/Atom" ' +
 													'xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">' +
@@ -102,7 +103,8 @@ bvnQrApp.factory('spreadsheets',
 						url: urlAndParams.url,
 						params: urlAndParams.params
 					})).then((result) => {
-						console.log(result);
+						var typescriptcompilerbug = _attendanceSheet.rows;
+						typescriptcompilerbug.data.feed.entry.push( result.data.entry );
 						deferred.resolve( result );
 					}, (error) => {
 						console.log( error );
