@@ -15,10 +15,23 @@ interface IBvnProxyService {
 }
 
 bvnQrApp.factory('bvnProxy',
-		<any[]>['$location',
-		function($location):IBvnProxyService {
+		<any[]>['$window',
+		function($window):IBvnProxyService {
+			var PROXY_URL:string = $window.location.origin.search('localhost') != -1 ?
+				"http://localhost:3000/proxy/bounce" : null;
 			return {
 				translate: (config) => {
+					var targetUrl = config.url;
+					config.url = PROXY_URL;
+					if (config.method === 'GET') {
+						config.params['target_uri'] = config.url;
+					} else if (config.method === 'POST') {
+						var data = config.data;
+						config.data = {
+							'target_uri': config.url,
+							data: data
+						};
+					}
 					return config;
 				}
 			}
