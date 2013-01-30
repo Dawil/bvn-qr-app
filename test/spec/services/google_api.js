@@ -35,48 +35,42 @@ describe('google api service test', function() {
 
 		it('should set the correct base url', function(){
 			expect( spreadsheets.toString() )
-				.toBe( "https://spreadsheets.google.com/feeds/list/" );
+				.toBe( "https://spreadsheets.google.com/feeds/list" );
 		});
 
 		describe('sheets', function(){
-			var sheet;
+			var sheet, spreadsheetsUrl, sheetId;
 
 			beforeEach(function(){
-				sheet = spreadsheets.sheet( "abba" );
+				sheetId = "abba";
+				sheet = spreadsheets.sheet( sheetId );
 			});
 
-			describe('default suffix', function(){
-				it('should have a default suffix', function(){
-					expect( sheet.defaultSuffix() )
-						.toBe( "/od6/private/full" );
+			it('should automatically append the suffix if sheet is defined', function(){
+				expect( sheet.toString().search( "od6/private/full" ) > -1 )
+					.toBe( true );
+			});
+
+			describe('worksheets', function(){
+				var worksheet;
+
+				beforeEach(function(){
+					worksheet = sheet.worksheet( "baab" );
 				});
 
-				it('should automatically append the defaultSuffix if necessary', function(){
-					expect( sheet.toString() )
-						.toBe( spreadsheets.toString() + "/abba" + spreadsheets.defaultSuffix() );
+				it('should add worksheet ids correctly', function(){
+					expect( worksheet.toString().search( "baab" ) > -1 )
+						.toBe( true );
 				});
 
-				describe('worksheets', function(){
-					var worksheet;
+				it('should set private by default', function(){
+					expect( worksheet.toString().search( "private" ) > -1 )
+						.toBe( true );
+				});
 
-					beforeEach(function(){
-						worksheet = sheet.worksheet( "baab" );
-					});
-
-					it('should add worksheet ids correctly', function(){
-						expect( worksheet.toString() )
-							.toBe( sheet.toString() + "/baab" + spreadsheets.defaultSuffix() );
-					});
-
-					it('should set private by default', function(){
-						expect( worksheet.toString().search( "private" ) > -1 )
-							.toBe( true );
-					});
-
-					it('should set full by default', function(){
-						expect( worksheet.toString().search( "full" ) > -1 )
-							.toBe( true );
-					});
+				it('should set full by default', function(){
+					expect( worksheet.toString().search( "full" ) > -1 )
+						.toBe( true );
 				});
 			});
 		});
