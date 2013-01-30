@@ -5,3 +5,4 @@
 /// <reference path="controllers/log_in.ts" />
 /// <reference path="services/auth.ts" />
 /// <reference path="services/spreadsheets.ts" />
+/// <reference path="services/bvn_proxy.ts" />
