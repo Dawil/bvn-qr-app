@@ -45,3 +45,20 @@ Tests
 
 * should test that `auth` service exists
 * test `auth` has the above methods
+
+CORS
+====
+
+The same origin policy has prevented me from performing GET and POST requests to different origin servers like the google data servers (spreadsheet api, etc).
+
+What concerns me is that the new CORS standard means that anyone hosting a server somewhere can create a public proxy allowing any javascript in any web browser supporting CORS to bypass the same origin policy. So doesn't CORS completely break any security provided by the same origin policy, and if it does and nobody cares doesn't that mean that the same origin policy is now a redundant pain in the butt and should be deprecated?
+
+see 
+
+    http://stackoverflow.com/questions/6744283/what-is-the-threat-model-for-the-same-origin-policy
+
+and 
+
+    http://blogs.msdn.com/b/ieinternals/archive/2009/08/28/explaining-same-origin-policy-part-1-deny-read.aspx
+
+for an explanation.

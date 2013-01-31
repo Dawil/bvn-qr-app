@@ -21,7 +21,8 @@ bvnQrApp.factory('auth',
 									+ $window.location.pathname
 									+ "oauth2callback.html",
 			scope = ["https://spreadsheets.google.com/feeds/",
-							 "https://www.googleapis.com/auth/drive.file"].join(" "),
+							 "https://www.googleapis.com/auth/drive.file",
+							 "https://docs.google.com/feeds"].join(" "),
 			params = [ ["response_type"		, "token"]
 							 , ["client_id"				, clientId]
 							 , ["redirect_uri"		, $window.escape(redirectUri)]
