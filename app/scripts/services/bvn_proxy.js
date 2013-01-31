@@ -22,3 +22,4 @@ bvnQrApp.factory('bvnProxy', [
             }
         };
     }]);
+//@ sourceMappingURL=bvn_proxy.js.map

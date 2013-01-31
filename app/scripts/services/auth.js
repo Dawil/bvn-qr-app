@@ -5,7 +5,8 @@ bvnQrApp.factory('auth', [
     function ($window, $cookieStore) {
         var env = $window.location.origin.search('localhost') != -1 ? 'dev' : 'prod', clientId = env == 'dev' ? "640956945398.apps.googleusercontent.com" : "640956945398-buj3vfpr8122a6j2abamh81066av0cgv.apps.googleusercontent.com", redirectUri = $window.location.origin + $window.location.pathname + "oauth2callback.html", scope = [
 "https://spreadsheets.google.com/feeds/", 
-"https://www.googleapis.com/auth/drive.file"        ].join(" "), params = [
+"https://www.googleapis.com/auth/drive.file", 
+"https://docs.google.com/feeds"        ].join(" "), params = [
 [
 "response_type", 
 "token"            ], 

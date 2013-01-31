@@ -48,3 +48,4 @@ bvnQrApp.factory('qrReader', [
             }
         };
     }]);
+//@ sourceMappingURL=qr_reader.js.map
