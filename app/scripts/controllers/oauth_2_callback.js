@@ -23,3 +23,4 @@ bvnQrApp.controller('Oauth2CallbackCtrl', [
             $location.path('/welcome');
         }
     }]);
+//@ sourceMappingURL=oauth_2_callback.js.map

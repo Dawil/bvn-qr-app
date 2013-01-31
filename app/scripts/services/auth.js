@@ -40,3 +40,4 @@ paramsString        ].join("?");
             }
         };
     }]);
+//@ sourceMappingURL=auth.js.map
