@@ -24,7 +24,15 @@ bvnQrApp.controller('SessionsCtrl',
 
 			$scope.scanQr = (image) => {
 				var file = image.files[0];
-				qrReader.scanQr( file );
+				console.log( "start" );
+				var x = qrReader.scanQr( file );
+				console.log( "end" );
+				console.log( x );
+				x.then( (attendeeEmail) => {
+						console.log( "sending email" );
+						console.log( attendeeEmail );
+						spreadsheets.addRow( attendeeEmail, auth.accessToken() );
+					});
 			};
 		}
 	]

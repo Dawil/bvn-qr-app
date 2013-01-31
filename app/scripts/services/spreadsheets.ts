@@ -87,6 +87,7 @@ bvnQrApp.factory('spreadsheets',
 				}, addRow: (row, accessToken) => {
 					var f,f;
 					var deferred = $q.defer();
+					console.log( "adding: ", row );
 					var	body = '<entry xmlns="http://www.w3.org/2005/Atom" ' +
 													'xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">' +
 												'<gsx:person>' + row + '</gsx:person>' +

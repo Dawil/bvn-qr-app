@@ -8,8 +8,13 @@
 	</ul>
 </div>
 <div ng-show="!!getRows()">
+	<div>
+		<h5>Add new attendee:</h5>
+		<input onchange="angular.element(this).scope().scanQr(this)"
+				id="input" type="file" accept="image/*" />
+	</div>
 	<h4>Marked as Attending:</h4>
-	<form>
+	<form style="display: none">
 		<input type="text" ng-model="newAttendee" value="New Attendee">
 		<input type="button" ng-click="addRow()" value="Add">
 	</form>
@@ -18,10 +23,4 @@
 			{{ attendee.title.$t }}
 		</li>
 	</ul>
-</div>
-<div>
-	<p>Add new attendee:</p>
-	<input onchange="angular.element(this).scope().scanQr(this)"
- 			id="input" type="file" accept="image/*" />
-	<canvas id="canvas" class="hidden"/>
 </div>
