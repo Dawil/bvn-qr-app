@@ -87,29 +87,13 @@ bvnQrApp.factory('spreadsheets',
 				}, addRow: (row, accessToken) => {
 					var f,f;
 					var deferred = $q.defer();
-					console.log( "adding: ", row );
-					var	body = '<entry xmlns="http://www.w3.org/2005/Atom" ' +
-													'xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended">' +
-												'<gsx:person>' + row + '</gsx:person>' +
-											'</entry>';
-					var metaData = _attendanceSheet.metaData;
-					var urlAndParams = googleApiUrl.spreadsheets()
-						.sheet( metaData['id'] )
-						.authenticate( accessToken )
-						.asJson()
-						.toUrlAndParams();
-					$http( bvnProxy.translate({
-						method: 'POST',
-						data: body,
-						url: urlAndParams.url,
-						params: urlAndParams.params
-					})).then((result) => {
-						var typescriptcompilerbug = _attendanceSheet.rows;
-						typescriptcompilerbug.data.feed.entry.push( result.data.entry );
-						deferred.resolve( result );
-					}, (error) => {
-						console.log( error );
-						deferred.reject( error );
+					$http( {
+						url: "https://script.google.com/a/macros/davidgwilcox.com/s/AKfycbzTJIyUdlhe6cb13ULpz5gRrlq5icQ_fpNIH-J-bLaPl46_F2A/exec",
+						method: 'JSONP',
+						params: { person: row, callback: 'JSON_CALLBACK', alt: 'json' }
+					}).then( (res) => {
+						console.log(res);
+						deferred.resolve( res );
 					});
 					return deferred.promise;
 				}
