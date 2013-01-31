@@ -21,7 +21,7 @@ bvnQrApp.factory('bvnProxy',
 		<any[]>['$window',
 		function($window):IBvnProxyService {
 			var PROXY_URL:string = $window.location.origin.search('localhost') != -1 ?
-				"http://localhost:3000/proxy/bounce" : null;
+				"http://localhost:3000/proxy/bounce" : "http://aqueous-harbor-1616.herokuapp.com/proxy/bounce";
 			return {
 				translate: (config) => {
 					var targetUrl = config.url;
