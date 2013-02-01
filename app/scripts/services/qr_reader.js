@@ -32,7 +32,6 @@ bvnQrApp.factory('qrReader', [
                         ctx.drawImage(img, 0, 0, width, height);
                         var dataurl = canvas.toDataURL("image/jpeg");
                         qrcode.callback = function (result) {
-                            console.log(result, deferred);
                             deferred.resolve(result);
                             $rootScope.$apply();
                         };
@@ -41,9 +40,6 @@ bvnQrApp.factory('qrReader', [
                     img.src = readerOnloadEvent.target.result;
                 };
                 reader.readAsDataURL(file);
-                deferred.promise.then(function () {
-                    console.log("qr decoded, deferred resolved");
-                });
                 return deferred.promise;
             }
         };
