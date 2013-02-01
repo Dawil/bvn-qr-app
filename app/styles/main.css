@@ -6160,3 +6160,13 @@ a.label:hover, a.badge:hover {
 .log-in {
   text-align: center;
 }
+
+/* line 9, ../../app/styles/main.scss */
+.qr-info-decoding-error {
+  color: red;
+}
+
+/* line 11, ../../app/styles/main.scss */
+.qr-info-upload-success {
+  color: green;
+}
