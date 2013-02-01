@@ -83,9 +83,6 @@ rows: null        }, _formSheet;
             addRow: function (row, accessToken) {
                 var f, f;
                 var deferred = $q.defer();
-                console.log("I totally just sent " + row + " to the spreadsheet just now...");
-                deferred.resolve();
-                return deferred.promise;
                 $http({
                     url: "https://script.google.com/a/macros/davidgwilcox.com/s/AKfycbzTJIyUdlhe6cb13ULpz5gRrlq5icQ_fpNIH-J-bLaPl46_F2A/exec",
                     method: 'JSONP',
@@ -95,8 +92,9 @@ rows: null        }, _formSheet;
                         alt: 'json'
                     }
                 }).then(function (res) {
-                    console.log(res);
                     deferred.resolve(res);
+                }, function (error) {
+                    deferred.resolve(error);
                 });
                 return deferred.promise;
             }

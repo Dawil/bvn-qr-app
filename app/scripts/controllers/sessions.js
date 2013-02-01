@@ -22,8 +22,7 @@ bvnQrApp.controller('SessionsCtrl', [
                 message: 'Decoding QR code...',
                 cssClass: 'decoding'
             };
-            var x = qrReader.scanQr(file);
-            x.then(function (attendeeEmail) {
+            var x = qrReader.scanQr(file).then(function (attendeeEmail) {
                 if(attendeeEmail.search("error") !== -1) {
                     $scope.qrInfo = {
                         message: 'Error decoding QR code. Try taking a new picture.',
@@ -39,6 +38,7 @@ bvnQrApp.controller('SessionsCtrl', [
                             message: 'Successfully marked ' + attendeeEmail + ' as attending!',
                             cssClass: 'upload-success'
                         };
+                        spreadsheets.syncData(auth.accessToken());
                     });
                 }
             });
