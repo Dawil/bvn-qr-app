@@ -12,6 +12,9 @@
 		<h5>Add new attendee:</h5>
 		<input onchange="angular.element(this).scope().scanQr(this)"
 				id="input" type="file" accept="image/*" />
+				<p class="qr-info-{{ qrInfo.cssClass }}">
+					{{ qrInfo.message }}
+				</p>
 	</div>
 	<h4>Marked as Attending:</h4>
 	<form style="display: none">

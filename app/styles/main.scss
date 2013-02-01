@@ -3,3 +3,9 @@
 .log-in {
 	text-align:center;
 }
+
+.qr-info-plain {}
+.qr-info-decoding {}
+.qr-info-decoding-error { color: red; }
+.qr-info-decoding-success {}
+.qr-info-upload-success { color: green; }
