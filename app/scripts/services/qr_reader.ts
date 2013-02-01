@@ -45,7 +45,6 @@ bvnQrApp.factory( 'qrReader',
 
 						// Decode
 						qrcode.callback = (result) => {
-							console.log( result, deferred);
 							deferred.resolve(result);
 							$rootScope.$apply();
 						};
@@ -54,7 +53,6 @@ bvnQrApp.factory( 'qrReader',
 					img.src = readerOnloadEvent.target.result;
 				};
 				reader.readAsDataURL(file);
-				deferred.promise.then( () => {console.log("qr decoded, deferred resolved")});
 				return deferred.promise;
 			}
 		};

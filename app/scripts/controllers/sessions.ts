@@ -7,6 +7,7 @@ interface ISessionsScope {
 	sessionRows: any;
 	addRow: () => void;
 	newAttendee: string;
+	qrInfo: { message:string; cssClass:string; };
 }
 
 bvnQrApp.controller('SessionsCtrl',
@@ -17,6 +18,10 @@ bvnQrApp.controller('SessionsCtrl',
 			$scope.getRows = spreadsheets.getRows;
 			$scope.getSpreadsheet = spreadsheets.getSpreadsheet;
 			$scope.getFormSheet = spreadsheets.getFormSheet;
+			$scope.qrInfo = {
+				message: '',
+				cssClass: 'plain'
+			};
 
 			$scope.addRow = () => {
 				spreadsheets.addRow($scope.newAttendee, auth.accessToken());
@@ -24,14 +29,30 @@ bvnQrApp.controller('SessionsCtrl',
 
 			$scope.scanQr = (image) => {
 				var file = image.files[0];
-				console.log( "start" );
+				$scope.qrInfo = {
+					message: 'Decoding QR code...',
+					cssClass: 'decoding'
+				};
 				var x = qrReader.scanQr( file );
-				console.log( "end" );
-				console.log( x );
 				x.then( (attendeeEmail) => {
-						console.log( "sending email" );
-						console.log( attendeeEmail );
-						spreadsheets.addRow( attendeeEmail, auth.accessToken() );
+						if (attendeeEmail.search("error") !== -1) {
+							$scope.qrInfo = {
+								message: 'Error decoding QR code. Try taking a new picture.',
+								cssClass: 'decoding-error'
+							};
+						} else {
+							$scope.qrInfo = {
+								message: 'QR code decoded! Uploading ' + attendeeEmail + ' as attending...',
+								cssClass: 'decoding-success'
+							};
+							spreadsheets.addRow( attendeeEmail, auth.accessToken() )
+								.then( (result) => {
+									$scope.qrInfo = {
+										message: 'Successfully marked ' + attendeeEmail + ' as attending!',
+										cssClass: 'upload-success'
+									};
+								});
+						}
 					});
 			};
 		}
